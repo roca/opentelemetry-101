@@ -10,7 +10,10 @@ services:
       - .:/usr/src/app:rw
     ports:
       - 8081:8080
-    command: "tail -f /dev/null"
+    command: >
+      sh -c "yarn install && 
+      yarn add @opentelemetry/api @opentelemetry/auto-instrumentations-node @opentelemetry/exporter-trace-otlp-proto @opentelemetry/sdk-node && 
+      tail -f /dev/null"
   auth:
     container_name: auth-service
     build: 
@@ -18,7 +21,10 @@ services:
       dockerfile: dockerfile.auth-service
     volumes:
       - .:/usr/src/app:rw
-    command: "tail -f /dev/null"
+    command: >
+      sh -c "yarn install && 
+      yarn add @opentelemetry/api @opentelemetry/auto-instrumentations-node @opentelemetry/exporter-trace-otlp-proto @opentelemetry/sdk-node && 
+      tail -f /dev/null"
   redis:
     container_name:  redis
     image: redis:latest

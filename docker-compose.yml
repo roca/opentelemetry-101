@@ -9,12 +9,16 @@ services:
       - .:/usr/src/app:rw
     ports:
       - 8081:8080
+    command:
+      - yarn install
   auth:
     build: 
       context: .
       dockerfile: dockerfile.auth-service
     volumes:
       - .:/usr/src/app:rw
+    command:
+      - yarn install
   redis:
     image: redis:latest
     ports:

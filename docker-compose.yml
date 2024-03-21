@@ -2,6 +2,7 @@ version: '3.8'
 
 services:
   todo:
+    container_name: todo-service
     build: 
       context: .
       dockerfile: dockerfile.todo-service
@@ -9,13 +10,17 @@ services:
       - .:/usr/src/app:rw
     ports:
       - 8081:8080
+    command: "tail -f /dev/null"
   auth:
+    container_name: auth-service
     build: 
       context: .
       dockerfile: dockerfile.auth-service
     volumes:
       - .:/usr/src/app:rw
+    command: "tail -f /dev/null"
   redis:
+    container_name:  redis
     image: redis:latest
     ports:
       - '6379:6379'

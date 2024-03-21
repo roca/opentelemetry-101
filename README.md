@@ -1,4 +1,4 @@
-# Observability in Cloud Native apps using OpenTelemetry
+# Lesion 1 : Observability in Cloud Native apps using OpenTelemetry
 
 Welcome to the Observability in Cloud Native apps using OpenTelemetry
  repository! This repository contains a demo application that is being used throughout the Udemy course. Whether you're a beginner or an experienced developer, the demo application will help you learn and understand the fundamentals of OpenTelemetry and Observability.

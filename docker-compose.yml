@@ -13,7 +13,7 @@ services:
     command: >
       sh -c "yarn install && 
       yarn add @opentelemetry/api @opentelemetry/auto-instrumentations-node @opentelemetry/exporter-trace-otlp-proto @opentelemetry/sdk-node && 
-      tail -f /dev/null"
+      yarn todo"
   auth:
     container_name: auth-service
     build: 
@@ -24,7 +24,7 @@ services:
     command: >
       sh -c "yarn install && 
       yarn add @opentelemetry/api @opentelemetry/auto-instrumentations-node @opentelemetry/exporter-trace-otlp-proto @opentelemetry/sdk-node && 
-      tail -f /dev/null"
+      yarn auth"
   redis:
     container_name:  redis
     image: redis:latest

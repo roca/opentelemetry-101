@@ -1,11 +1,18 @@
-FROM node:16.13.2
+FROM node:latest
+
+
+RUN apt-get update 
+RUN apt-get install yarn -y
+
 
 WORKDIR /usr/src/app
 
 COPY package.json ./
 COPY yarn.lock ./
 RUN yarn config set "strict-ssl" false -g
+RUN yarn add @opentelemetry/api @opentelemetry/auto-instrumentations-node @opentelemetry/exporter-trace-otlp-proto @opentelemetry/sdk-node
 RUN yarn install
+
 
 EXPOSE 8080
 

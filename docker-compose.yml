@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   todo:
-    container_name: todo-service
+    container_name: todo
     build: 
       context: .
       dockerfile: dockerfile.todo-service
@@ -10,21 +10,25 @@ services:
       - .:/usr/src/app:rw
     ports:
       - 8081:8080
-    command: >
-      sh -c "yarn install && 
-      yarn add @opentelemetry/api @opentelemetry/auto-instrumentations-node @opentelemetry/exporter-trace-otlp-proto @opentelemetry/sdk-node && 
-      yarn todo"
+    # command: >
+    #   sh -c "yarn install && 
+    #   yarn add @opentelemetry/api @opentelemetry/auto-instrumentations-node @opentelemetry/exporter-trace-otlp-proto @opentelemetry/sdk-node && 
+    #   yarn todo"
+    depends_on:
+      - auth
+      - redis
+      - jaeger
   auth:
-    container_name: auth-service
+    container_name: auth
     build: 
       context: .
       dockerfile: dockerfile.auth-service
     volumes:
       - .:/usr/src/app:rw
-    command: >
-      sh -c "yarn install && 
-      yarn add @opentelemetry/api @opentelemetry/auto-instrumentations-node @opentelemetry/exporter-trace-otlp-proto @opentelemetry/sdk-node && 
-      yarn auth"
+    # command: >
+    #   sh -c "yarn install && 
+    #   yarn add @opentelemetry/api @opentelemetry/auto-instrumentations-node @opentelemetry/exporter-trace-otlp-proto @opentelemetry/sdk-node && 
+    #   yarn auth"
   redis:
     container_name:  redis
     image: redis:latest

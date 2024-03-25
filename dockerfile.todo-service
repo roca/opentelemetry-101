@@ -9,7 +9,14 @@ WORKDIR /usr/src/app
 COPY package.json ./
 COPY yarn.lock ./
 RUN yarn config set "strict-ssl" false -g
-RUN yarn add @opentelemetry/api @opentelemetry/auto-instrumentations-node @opentelemetry/exporter-trace-otlp-proto @opentelemetry/sdk-node
+
+RUN yarn add @opentelemetry/api \
+@opentelemetry/auto-instrumentations-node \
+@opentelemetry/exporter-trace-otlp-proto \
+@opentelemetry/sdk-node \
+@opentelemetry/sdk-metrics \
+@opentelemetry/exporter-prometheus
+
 RUN yarn install
 
 EXPOSE 8080

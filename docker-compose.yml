@@ -2,6 +2,7 @@ version: '3.8'
 
 services:
   todo:
+    container_name: todo
     build: 
       context: .
       dockerfile: dockerfile.todo-service
@@ -9,17 +10,24 @@ services:
       - .:/usr/src/app:rw
     ports:
       - 8081:8080
+    depends_on:
+      - auth
+      - redis
+      - jaeger
   auth:
+    container_name: auth
     build: 
       context: .
       dockerfile: dockerfile.auth-service
     volumes:
       - .:/usr/src/app:rw
   redis:
+    container_name:  redis
     image: redis:latest
     ports:
       - '6379:6379'
   jaeger:
+    container_name: jaeger
     image: jaegertracing/all-in-one
     ports:
         - 4318
@@ -27,6 +35,7 @@ services:
     environment:
         COLLECTOR_OTLP_ENABLED: true
   prometheus:
+      container_name: prometheus
       image: prom/prometheus
       command:
         - '--config.file=/etc/prometheus/prometheus.yml'
